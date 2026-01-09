@@ -9,6 +9,7 @@ class CrearCategoria extends Component
 {
     public bool $openCrear=false;
     public FormCrearCategoria $cform;
+    
     public function render()
     {
         return view('livewire.crear-categoria');
@@ -16,9 +17,11 @@ class CrearCategoria extends Component
     public function guardar(){
         $this->cform->guardarCategoriaForm();
         $this->cancelar();
+        $this->dispatch('evtCategoriaCreada')->to(MostrarCategorias::class);
+        $this->dispatch('mensaje', 'Categoria Creada');
     }
     public function cancelar(){
-        $this->cform->canclearForm();
+        $this->cform->cancelarForm();
         $this->openCrear=false;
     }
    

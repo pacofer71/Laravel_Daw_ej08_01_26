@@ -19,7 +19,7 @@ class FormCrearCategoria extends Form
         //Guardamos
         Category::create($this->all());
     }
-    public function canclearForm(){
+    public function cancelarForm(){
         $this->resetValidation();
         $this->reset('nombre', 'color');
     }

@@ -54,13 +54,11 @@
                         <!-- Acciones -->
                         <td class="px-6 py-4 text-right">
                             <div class="inline-flex items-center gap-2">
-                                <button
-                                    class="rounded-lg bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100 transition">
-                                    Editar
+                                <button wire:click="editar({{ $item->id }})">
+                                    <i class="fas fa-edit"></i>
                                 </button>
-                                <button
-                                    class="rounded-lg bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100 transition">
-                                    Borrar
+                                <button wire:click="lanzarAlerta({{ $item->id }})">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </td>
@@ -71,5 +69,56 @@
 
         </table>
     </div>
+    <!-- ------------------------------------------- Modal para update categoria-------------------------------------- -->
+    <x-dialog-modal wire:model="openEditar">
+        <x-slot name="title">
+            Editar Categoria
+        </x-slot>
+        <x-slot name="content">
+            <div class="space-y-6">
 
+                <!-- Nombre de la categoría -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
+                        Nombre de la categoría
+                    </label>
+                    <input id="name" type="text" placeholder="Ej: Tecnología" wire:model="uform.nombre"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-800
+             placeholder-gray-400 shadow-sm
+             focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
+             transition" />
+                    <x-input-error for="uform.nombre" />
+                </div>
+
+                <!-- Color de la categoría -->
+                <div>
+                    <label for="color" class="block text-sm font-medium text-gray-700 mb-1">
+                        Color de la categoría
+                    </label>
+                    <div class="flex items-center gap-4">
+                        <input id="color" type="color" wire:model="uform.color"
+                            class="h-11 w-16 cursor-pointer rounded-md border border-gray-300 p-1" />
+                        <span class="text-sm text-gray-500">
+                            Selecciona un color representativo
+                        </span>
+                    </div>
+                    <x-input-error for="uform.color" />
+                </div>
+
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <div class="flex flex-row-reverse">
+                <button wire:click="update"
+                    class="text-white p-2 rounded-xl font-bold bg-green-500 hover:bg-green-700">
+                    <i class="fas fa-save mr-1"></i>EDITAR
+                </button>
+                <button wire:click="cancelar"
+                    class="mr-2 text-white p-2 rounded-xl font-bold bg-red-500 hover:bg-red-700">
+                    <i class="fas fa-xmark mr-1"></i>CANCELAR
+                </button>
+            </div>
+
+        </x-slot>
+    </x-dialog-modal>
 </x-mios.base>
