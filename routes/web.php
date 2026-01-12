@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\MostrarCategorias;
+use App\Livewire\Posts\MostrarUserPosts;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +19,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
     Route::get('categorias', MostrarCategorias::class)->name('categorias');
+    Route::get('posts', MostrarUserPosts::class)->name('posts');
 });
