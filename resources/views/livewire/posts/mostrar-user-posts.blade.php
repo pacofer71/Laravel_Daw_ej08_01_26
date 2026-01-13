@@ -85,7 +85,7 @@
                             <button class="text-blue-600 hover:text-blue-800 transition" title="Editar">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="text-red-600 hover:text-red-800 transition" title="Eliminar">
+                            <button class="text-red-600 hover:text-red-800 transition" title="Eliminar" wire:click="confirmarBorrar({{ $item->id }})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>

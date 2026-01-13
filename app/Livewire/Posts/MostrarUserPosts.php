@@ -4,6 +4,7 @@ namespace App\Livewire\Posts;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,7 +17,9 @@ class MostrarUserPosts extends Component
     public string $orden = 'desc';
 
     public string $buscar = '';
-
+    public ?Post $post=null;
+    
+    #[On('evtPostCreado')]
     public function render()
     {
         $posts = Post::select('posts.*', 'categories.nombre', 'categories.color')
@@ -43,5 +46,12 @@ class MostrarUserPosts extends Component
     //Si quiero buscar en todas las páginas
     public function updatingBuscar(){
         $this->resetPage();
+    }
+    // Metodos para borrar post
+    public function confirmarBorrar(Post $post){
+        $this->authorize('delete', $post);
+        $this->post=$post;
+        $this->dispatch('evtBorrarPost', '');
+
     }
 }

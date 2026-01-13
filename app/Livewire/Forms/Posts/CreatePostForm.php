@@ -28,7 +28,7 @@ class CreatePostForm extends Form
     public function guardarForm(){
         $datos=$this->validate();
         $datos['user_id']=Auth::id();
-        $datos['imagen']=$this->imagen?->store('images/posts') ?? 'images/posts/default.png';
+        $datos['imagen']=$this->imagen?->store('images/posts') ?? 'images/posts/default.jpg';
         Post::create($datos);
     }
     public function cancelarForm(){

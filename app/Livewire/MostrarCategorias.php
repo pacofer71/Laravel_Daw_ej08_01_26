@@ -13,6 +13,7 @@ class MostrarCategorias extends Component
     public string $orden="asc";
     public bool $openEditar=false;
     public FormEditarCategoria $uform;
+    public ?Category $category=null;
 
     #[On('evtCategoriaCreada')]
     public function render()
@@ -27,11 +28,12 @@ class MostrarCategorias extends Component
     }
     //-- Para borrar una categoria
     public function lanzarAlerta(Category $category){
-        $this->dispatch('evtBorrarCategoria', $category->id);
+        $this->category=$category;
+        $this->dispatch('evtBorrarCategoria', 'mostrar-categorias');
     }
     #[On('evtBorrarOk')]
-    public function borrar(Category $category){
-        $category->delete();
+    public function borrar(){
+        $this->category->delete();  
         $this->dispatch('mensaje', 'Categoria Borrada');
     }
     //------------ Metodos para editar categoria
