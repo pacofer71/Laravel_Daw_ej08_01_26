@@ -49,6 +49,21 @@
 
     @livewireScripts
     <script>
+        function mostrarDialogoBorrado(vistaDestino) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatchTo(vistaDestino, 'evtBorrarOk')
+                }
+            });
+        }
         Livewire.on('mensaje', txt => {
             Swal.fire({
                 icon: "success",
@@ -57,6 +72,9 @@
                 timer: 1500
             });
         });
+        Livewire.on('evtBorrarCategoria', ({destino})=>mostrarDialogoBorrado(destino));
+        Livewire.on('evtBorrarPost', ({destino})=>mostrarDialogoBorrado(destino));
+        /*
         Livewire.on('evtBorrarCategoria', vistadestino => {
             Swal.fire({
                 title: "Are you sure?",
@@ -68,10 +86,26 @@
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
-                   Livewire.dispatchTo(vistadestino, 'evtBorrarOk')
+                    Livewire.dispatchTo(vistadestino, 'evtBorrarOk')
+                }
+            });
+        });
+        Livewire.on('evtBorrarPost', vistadestino => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatchTo(vistadestino, 'evtBorrarOk')
                 }
             });
         })
+        */
     </script>
 </body>
 

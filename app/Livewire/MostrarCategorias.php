@@ -29,7 +29,7 @@ class MostrarCategorias extends Component
     //-- Para borrar una categoria
     public function lanzarAlerta(Category $category){
         $this->category=$category;
-        $this->dispatch('evtBorrarCategoria', 'mostrar-categorias');
+        $this->dispatch('evtBorrarCategoria', destino: 'mostrar-categorias');
     }
     #[On('evtBorrarOk')]
     public function borrar(){

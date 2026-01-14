@@ -4,6 +4,7 @@ namespace App\Livewire\Posts;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -51,7 +52,17 @@ class MostrarUserPosts extends Component
     public function confirmarBorrar(Post $post){
         $this->authorize('delete', $post);
         $this->post=$post;
-        $this->dispatch('evtBorrarPost', '');
-
+        $this->dispatch('evtBorrarPost', destino: 'posts.mostrar-user-posts');
+    }
+    #[On('evtBorrarOk')]
+    public function borrarPost(){
+        $imagenPost=$this->post->imagen;
+        $this->post->delete();
+        //borraré la imagen asociada el post
+        if(basename($imagenPost)!='default.jpg'){
+            Storage::delete($imagenPost);
+        }
+        $this->dispatch('mensaje', 'Post Eliminado');
+        $this->reset('post');
     }
 }
