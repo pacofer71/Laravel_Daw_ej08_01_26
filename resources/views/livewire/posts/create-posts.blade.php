@@ -95,11 +95,12 @@
                     </label>
                     <div class="w-full h-80 bg-gray-200 relative rounded-lg">
                         <input type="file" id="cimagen" class="hidden" accept="image/*" wire:model="cform.imagen" />
-                        <label for="cimagen" class="p-2 bg-gray-700 hover:bg-gray-900 rounded-xl text-white absolute bottom-2 right-2">
+                        <label for="cimagen" 
+                        class="p-2 bg-gray-700 hover:bg-gray-900 rounded-xl text-white absolute bottom-2 right-2">
                             <i class="fas fa-upload mt-1"></i>Subir
                         </label>
                         @isset($cform->imagen)
-                        <img src="{{ $cform->imagen->temporaryUrl() }}" class="w-full h-full object-center bg-no-repeat" />
+                        <img src="{{ $cform->imagen->temporaryUrl() }}" class="w-full h-full object-center bg-no-repeat" id="cimagencrear" />
                         @endisset
                     </div>
                 </div>
@@ -108,7 +109,7 @@
         </x-slot>
         <x-slot name="footer">
             <div class="flex flex-row-reverse">
-                <button wire:click="guardar"
+                <button wire:click="guardar" wire:loading.attr='disabled'
                     class="text-white p-2 rounded-xl font-bold bg-green-500 hover:bg-green-700">
                     <i class="fas fa-save mr-1"></i>GUARDAR
                 </button>
